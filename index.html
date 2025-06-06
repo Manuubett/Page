@@ -224,8 +224,9 @@ main {
  <script>
   const timeoutMsg = document.getElementById("timeoutMsg");
   const redirectURL = "payment.html"; // Replace with real payment link
-  const duration = 240000; // 4 minutes in ms
-
+  const duration = 14400000; // 4 hours = 4 × 60 × 60 × 1000 ms
+  function startOrResumeTimer() {
+    let startTime = local
   function startOrResumeTimer() {
     let startTime = localStorage.getItem("startTime");
     const now = Date.now();
