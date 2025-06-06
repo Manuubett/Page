@@ -223,8 +223,9 @@ main {
   </script>
  <script>
   const timeoutMsg = document.getElementById("timeoutMsg");
+timeoutMsg.style.display = "none";  // This hides the element
   const redirectURL = "payment.html"; // Replace with real payment link
-  const duration = 14400000; // 4 hours = 4 × 60 × 60 × 1000 ms
+  const duration = 28800000; // 8 × 60 × 60 × 1000 = 28,800,000 ms
 
   function startOrResumeTimer() {
     let startTime = localStorage.getItem("startTime");
@@ -260,4 +261,4 @@ main {
   startOrResumeTimer(); // Start the countdown
 </script>
 </body>
-                      </html>
+</html>
