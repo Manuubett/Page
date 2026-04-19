@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +37,6 @@
 }
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-height:100vh;display:flex;flex-direction:column}
 
-/* ── SCROLLBAR ── */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
@@ -77,7 +77,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font-body);min-hei
 .sb-footer{padding:.8rem 1rem;border-top:1px solid var(--border)}
 .sb-admin{display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;padding:.5rem .5rem;border-radius:8px;background:var(--surface2)}
 .sb-admin img{width:26px;height:26px;border-radius:50%;border:1px solid var(--accent);object-fit:cover;flex-shrink:0}
-.sb-admin-info{}
 .sb-admin-name{font-weight:600;color:var(--text);font-size:.78rem}
 .sb-admin-role{font-size:.65rem;color:var(--muted);letter-spacing:.3px}
 .btn-logout{background:none;border:1px solid var(--border2);color:var(--muted);width:100%;padding:.4rem;border-radius:7px;font-size:.72rem;cursor:pointer;transition:.2s;font-family:var(--font-body);display:flex;align-items:center;justify-content:center;gap:.4rem}
@@ -197,7 +196,7 @@ table.admin-tbl{width:100%;border-collapse:collapse;font-size:.81rem}
 .espn-unlinked{color:var(--muted);font-size:.66rem}
 
 /* ══════════════════════════════════
-   SHARE CARD  — Mobile-first layout
+   SHARE CARD — Fixed grid layout
 ══════════════════════════════════ */
 .share-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .share-section-header{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
@@ -210,7 +209,6 @@ table.admin-tbl{width:100%;border-collapse:collapse;font-size:.81rem}
 .btn-share{display:flex;align-items:center;gap:.4rem;padding:.35rem 1rem;border-radius:7px;border:1px solid rgba(139,92,246,.3);background:rgba(139,92,246,.08);color:var(--purple);font-size:.75rem;font-weight:600;cursor:pointer;font-family:var(--font-body);transition:.15s}
 .btn-share:hover{background:rgba(139,92,246,.18)}
 
-/* The card itself */
 .share-card-wrap{padding:1.1rem 1.3rem}
 .share-card{background:#0b1120;border-radius:14px;overflow:hidden;max-width:520px;border:1px solid rgba(255,255,255,.06)}
 
@@ -223,43 +221,58 @@ table.admin-tbl{width:100%;border-collapse:collapse;font-size:.81rem}
 .sc-live-row{display:flex;align-items:center;gap:4px;margin-top:4px;justify-content:flex-end;font-size:.62rem;color:var(--success);font-weight:600}
 .sc-live-dot{width:5px;height:5px;border-radius:50%;background:var(--success);animation:livePulse 1.4s infinite}
 
-/* Column labels */
-.sc-col-labels{display:grid;grid-template-columns:62px 52px 1fr 82px 52px;gap:0;padding:6px 12px;background:rgba(255,255,255,.025);border-bottom:1px solid rgba(255,255,255,.05)}
+/* ── FIXED GRID: identical columns for header labels + data rows ── */
+.sc-col-labels{
+  display:grid;
+  grid-template-columns:64px 48px minmax(0,1fr) 88px 54px;
+  gap:0;
+  padding:6px 12px;
+  background:rgba(255,255,255,.025);
+  border-bottom:1px solid rgba(255,255,255,.05)
+}
 .sc-col-lbl{font-size:.59rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:rgba(255,255,255,.3)}
 .sc-col-lbl.center{text-align:center}
 .sc-col-lbl.right{text-align:right}
 
-/* Tip rows */
-.sc-tip-row{display:grid;grid-template-columns:62px 52px 1fr 82px 52px;gap:0;padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.04);align-items:center;transition:.1s}
+.sc-tip-row{
+  display:grid;
+  grid-template-columns:64px 48px minmax(0,1fr) 88px 54px;
+  gap:0;
+  padding:9px 12px;
+  border-bottom:1px solid rgba(255,255,255,.04);
+  align-items:center;
+  transition:.1s
+}
 .sc-tip-row:last-child{border-bottom:none}
 .sc-tip-row:hover{background:rgba(255,255,255,.015)}
 
 /* League col */
-.sc-league{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.2px}
+.sc-league{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Time col */
-.sc-time-col{display:flex;align-items:center;gap:4px}
+.sc-time-col{display:flex;align-items:center;gap:4px;min-width:0}
 .sc-result-icon{width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .sc-result-icon.won{background:var(--success)}
 .sc-result-icon.lost{background:var(--danger)}
 .sc-result-icon.live{background:var(--warn)}
 .sc-result-icon.pending{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1)}
 .sc-result-icon svg{width:9px;height:9px}
-.sc-time-txt{font-size:.68rem;color:rgba(255,255,255,.4);font-weight:500}
+.sc-time-txt{font-size:.66rem;color:rgba(255,255,255,.4);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-/* Match col */
-.sc-team-row{display:flex;align-items:center;justify-content:space-between;gap:4px}
-.sc-team-name{font-size:.73rem;color:rgba(255,255,255,.8);line-height:1.35;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px}
-.sc-team-score{font-size:.8rem;font-weight:700;color:#fff;min-width:12px;text-align:right;flex-shrink:0}
+/* Match col — teams + scores side by side */
+.sc-match-col{min-width:0}
+.sc-team-row{display:flex;align-items:center;justify-content:space-between;gap:4px;line-height:1.45}
+.sc-team-name{font-size:.72rem;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.sc-team-score{font-size:.78rem;font-weight:700;color:#fff;flex-shrink:0;min-width:14px;text-align:right}
 .sc-team-score.live-score{color:var(--success)}
 
 /* Pick col */
-.sc-pick-cell{text-align:center}
-.sc-pick-badge{display:inline-block;background:rgba(230,0,126,.1);border:1px solid rgba(230,0,126,.25);color:var(--accent2);padding:2px 7px;border-radius:20px;font-size:.68rem;font-weight:600;white-space:nowrap}
+.sc-pick-cell{text-align:center;padding:0 4px}
+.sc-pick-badge{display:inline-block;background:rgba(230,0,126,.1);border:1px solid rgba(230,0,126,.25);color:var(--accent2);padding:2px 6px;border-radius:20px;font-size:.65rem;font-weight:600;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
 .sc-pick-badge.pro{background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.25);color:var(--gold)}
 
 /* Odds col */
-.sc-odds-cell{text-align:right;font-family:var(--font-head);font-size:.9rem;font-weight:800;color:var(--gold)}
+.sc-odds-cell{text-align:right;font-family:var(--font-head);font-size:.88rem;font-weight:800;color:var(--gold)}
 
 /* Total row */
 .sc-total-row{display:flex;align-items:center;justify-content:flex-end;gap:8px;padding:9px 14px;background:rgba(255,255,255,.025);border-top:1px solid rgba(255,255,255,.06)}
@@ -817,20 +830,54 @@ function loadTips(){
     var data=snap.val();
     var total=0,wins=0,losses=0,proCount=0,linkedCount=0;
     allTipsCache=[];
+
     if(data){
+      var rawTips=[];
       Object.keys(data).forEach(function(league){
         var tips=(data[league]&&data[league].tips)?data[league].tips:{};
         Object.entries(tips).forEach(function(entry){
           var key=entry[0],tip=entry[1];
-          total++;
-          if(tip.result==='right')wins++;
-          if(tip.result==='wrong')losses++;
-          if(tip.isPro)proCount++;
-          if(tip.espnId)linkedCount++;
-          allTipsCache.push(Object.assign({},tip,{league:league,key:key}));
+          rawTips.push(Object.assign({},tip,{league:league,key:key}));
         });
       });
+
+      /* build espnId → live data map */
+      var espnLiveMap={};
+      rawTips.forEach(function(tip){
+        if(tip.espnId){
+          var id=String(tip.espnId);
+          if(!espnLiveMap[id])espnLiveMap[id]={};
+          if(tip.liveScore)  espnLiveMap[id].liveScore=tip.liveScore;
+          if(tip.outcome)    espnLiveMap[id].outcome=tip.outcome;
+          if(tip.clock)      espnLiveMap[id].clock=tip.clock;
+          if(tip.isLive)     espnLiveMap[id].isLive=tip.isLive;
+          if(tip.isFinished) espnLiveMap[id].isFinished=tip.isFinished;
+          if(tip.scoreStr)   espnLiveMap[id].scoreStr=tip.scoreStr;
+        }
+      });
+
+      /* merge live data back */
+      rawTips.forEach(function(tip){
+        if(tip.espnId){
+          var live=espnLiveMap[String(tip.espnId)];
+          if(live){
+            tip.liveScore  = live.liveScore  || tip.liveScore;
+            tip.outcome    = live.outcome    || tip.outcome;
+            tip.clock      = live.clock      || tip.clock;
+            tip.isLive     = live.isLive     || tip.isLive;
+            tip.isFinished = live.isFinished || tip.isFinished;
+            tip.scoreStr   = live.scoreStr   || tip.scoreStr;
+          }
+        }
+        total++;
+        if(tip.result==='right')wins++;
+        if(tip.result==='wrong')losses++;
+        if(tip.isPro)proCount++;
+        if(tip.espnId)linkedCount++;
+        allTipsCache.push(tip);
+      });
     }
+
     var wr=(wins+losses)>0?Math.round(wins/(wins+losses)*100):0;
     document.getElementById('sTips').textContent=total;
     document.getElementById('sWins').textContent=wins;
@@ -854,9 +901,28 @@ function renderManageTable(){
     var typeBadge=isPro?'<span class="pro-badge-inline"><i class="fas fa-crown"></i> PRO</span>':'<span class="free-badge-inline">Free</span>';
     var resClass=tip.result==='right'?'right':tip.result==='wrong'?'wrong':'';
     var proIcon=isPro?'fas fa-star':'far fa-star';
+
+    /* FT safety net for manage table */
+    var clockStr=tip.clock||'';
+    var addedTimeStuck=(/^90\+/).test(clockStr)&&tip.isLive;
+    var resultSet=tip.result==='right'||tip.result==='wrong';
+    var forceFT=resultSet||addedTimeStuck;
+    var isLive=tip.isLive&&!forceFT;
+    var isFinished=tip.isFinished||forceFT||(!isLive&&(tip.scoreStr||tip.liveScore||tip.outcome));
+
     var scoreHtml='';
-    if(tip.liveScore||tip.outcome){var sc=tip.liveScore||tip.outcome;var cls=tip.isLive?'live':'ft';var icon=tip.isLive?'<i class="fas fa-circle" style="font-size:.45rem"></i> ':'';scoreHtml='<span class="score-pill '+cls+'">'+icon+esc(sc)+'</span>'+(tip.clock&&tip.isLive?'<span style="color:var(--success);font-size:.66rem;margin-left:4px">'+esc(tip.clock)+'</span>':'');}
-    else{scoreHtml='<span class="score-pill none">—</span>';}
+    var rawSc=tip.scoreStr||tip.liveScore||tip.outcome||'';
+    if(rawSc){
+      var scCls=isLive?'live':'ft';
+      var scIcon=isLive?'<i class="fas fa-circle" style="font-size:.42rem;margin-right:2px"></i>':'';
+      var scClock=isLive&&tip.clock?'<span style="color:var(--success);font-size:.63rem;margin-left:5px">'+esc(tip.clock)+'</span>':'';
+      var scLabel=isLive?esc(rawSc):esc(rawSc)+' <span style="font-size:.62rem;opacity:.6">FT</span>';
+      scoreHtml='<span class="score-pill '+scCls+'">'+scIcon+scLabel+'</span>'+scClock;
+    }else{
+      if(isFinished&&!rawSc){scoreHtml='<span class="score-pill ft">FT</span>';}
+      else{scoreHtml='<span class="score-pill none">—</span>';}
+    }
+
     var espnCell=tip.espnId?'<span class="espn-linked"><i class="fas fa-satellite-dish"></i> #'+esc(String(tip.espnId))+'</span>':'<span class="espn-unlinked">—</span>';
     var tr=document.createElement('tr');
     tr.innerHTML='<td style="font-weight:600;font-size:.85rem">'+esc(tip.league)+'</td>'
@@ -890,7 +956,9 @@ function setShareFilter(f,btn){
   renderShareCard();
 }
 
-/* ── RENDER SHARE CARD (mobile-style) ── */
+/* ══════════════════════════════════════════════════════
+   RENDER SHARE CARD — Fixed grid + FT safety net
+══════════════════════════════════════════════════════ */
 function renderShareCard(){
   var container=document.getElementById('shareRows');
   container.innerHTML='';
@@ -898,7 +966,6 @@ function renderShareCard(){
   document.getElementById('scDate').textContent=now.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
 
   var tips=filterTips(shareFilter);
-
   if(!tips.length){
     container.innerHTML='<div class="sc-empty"><i class="fas fa-inbox" style="font-size:1.3rem;opacity:.2;display:block;margin-bottom:.4rem"></i>No tips for this filter</div>';
     document.getElementById('scTotalOdds').textContent='—';
@@ -910,49 +977,86 @@ function renderShareCard(){
     var oddsVal=parseFloat(tip.odds);
     if(!isNaN(oddsVal)&&oddsVal>0)totalOdds*=oddsVal;
 
-    // result icon SVG
+    /* ── FT SAFETY NET ────────────────────────────────────────────
+       Three triggers force the game to be treated as finished:
+       1. Admin has already set result (right / wrong)
+       2. ESPN clock is stuck in added time (90+X') but still isLive
+       3. isFinished flag is already set by the sync server
+    ─────────────────────────────────────────────────────────────── */
+    var clockStr=tip.clock||'';
+    var addedTimeStuck=(/^90\+/).test(clockStr)&&!!tip.isLive;
+    var resultSet=tip.result==='right'||tip.result==='wrong';
+    var forceFT=resultSet||addedTimeStuck||!!tip.isFinished;
+
+    var isLive=!!tip.isLive&&!forceFT;
+    var hasScore=!!(tip.scoreStr||tip.liveScore||tip.outcome);
+    var isFinished=forceFT||(hasScore&&!isLive);
+
+    /* Result icon */
     var iconHtml='';
-    if(tip.isLive){
+    if(isLive){
       iconHtml='<div class="sc-result-icon live"><svg viewBox="0 0 9 9"><circle cx="4.5" cy="4.5" r="2.5" fill="white"/></svg></div>';
     }else if(tip.result==='right'){
       iconHtml='<div class="sc-result-icon won"><svg viewBox="0 0 9 9"><polyline points="2,4.5 3.8,6.5 7,2.5" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
     }else if(tip.result==='wrong'){
       iconHtml='<div class="sc-result-icon lost"><svg viewBox="0 0 9 9"><line x1="2.5" y1="2.5" x2="6.5" y2="6.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/><line x1="6.5" y1="2.5" x2="2.5" y2="6.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg></div>';
+    }else if(isFinished){
+      /* Finished but result not yet set — grey pending check */
+      iconHtml='<div class="sc-result-icon" style="background:rgba(255,255,255,.12)"><svg viewBox="0 0 9 9"><polyline points="2,4.5 3.8,6.5 7,2.5" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
     }else{
       iconHtml='<div class="sc-result-icon pending"></div>';
     }
 
-    // parse matchup → two teams
+    /* Teams — parse "Home vs Away" */
     var parts=(tip.matchup||'').split(' vs ');
-    var home=esc(parts[0]||tip.matchup||'—');
-    var away=esc(parts[1]||'');
+    var home=esc((parts[0]||tip.matchup||'—').trim());
+    var away=esc((parts[1]||'').trim());
 
-    // scores
+    /* Scores — extract H-A from scoreStr / liveScore / outcome */
     var hs='',as_='';
-    if(tip.liveScore||tip.outcome){
-      var sc=String(tip.liveScore||tip.outcome||'');
-      var sm=sc.match(/(\d+)[^\d]+(\d+)/);
+    var rawScore=tip.scoreStr||tip.liveScore||tip.outcome||'';
+    if(rawScore){
+      var sm=String(rawScore).match(/(\d+)\s*[-–:]\s*(\d+)/);
       if(sm){hs=sm[1];as_=sm[2];}
     }
-    var scoreCls=tip.isLive?'sc-team-score live-score':'sc-team-score';
+    var scoreCls=isLive?'sc-team-score live-score':'sc-team-score';
 
-    // pick badge
+    /* Pick badge */
     var pickCls=tip.isPro?'sc-pick-badge pro':'sc-pick-badge';
 
-    // time display
-    var timeDisplay=tip.time||'—';
+    /* ── TIME DISPLAY ─────────────────────────────────────────────
+       Priority:
+         1. Live clock that isn't stuck in added time → e.g. "67'"
+         2. Finished / forced FT → "FT"
+         3. Kickoff time stored → e.g. "19:30"
+         4. Fallback → "—"
+    ─────────────────────────────────────────────────────────────── */
+    var timeDisplay;
+    if(isLive&&clockStr&&!addedTimeStuck){
+      timeDisplay=clockStr;
+    }else if(isFinished||forceFT){
+      timeDisplay='FT';
+    }else{
+      timeDisplay=tip.time||'—';
+    }
 
     var row=document.createElement('div');
     row.className='sc-tip-row';
     row.innerHTML=
+      /* Col 1 — League */
       '<div class="sc-league">'+esc(tip.league)+'</div>'
+      /* Col 2 — Status icon + time */
       +'<div class="sc-time-col">'+iconHtml+'<span class="sc-time-txt">'+esc(timeDisplay)+'</span></div>'
-      +'<div>'
-        +'<div class="sc-team-row"><span class="sc-team-name">'+home+'</span>'+(hs?'<span class="'+scoreCls+'">'+hs+'</span>':'')+'</div>'
-        +'<div class="sc-team-row"><span class="sc-team-name">'+away+'</span>'+(as_?'<span class="'+scoreCls+'">'+as_+'</span>':'')+'</div>'
+      /* Col 3 — Match teams + scores */
+      +'<div class="sc-match-col">'
+        +'<div class="sc-team-row"><span class="sc-team-name">'+home+'</span>'+(hs!==''?'<span class="'+scoreCls+'">'+hs+'</span>':'')+'</div>'
+        +'<div class="sc-team-row"><span class="sc-team-name">'+away+'</span>'+(as_!==''?'<span class="'+scoreCls+'">'+as_+'</span>':'')+'</div>'
       +'</div>'
+      /* Col 4 — Pick */
       +'<div class="sc-pick-cell"><span class="'+pickCls+'">'+esc(tip.prediction||'—')+'</span></div>'
+      /* Col 5 — Odds */
       +'<div class="sc-odds-cell">'+esc(tip.odds||'—')+'</div>';
+
     container.appendChild(row);
   });
 
@@ -984,6 +1088,44 @@ function deleteTip(league,key){
   db.ref('tips/'+activeKey+'/'+league+'/tips/'+key).remove();
   toast('Tip deleted');
 }
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
 </body>
 </html>
